@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.EvaluateMapper">
+    <select id="getByGood" resultType="com.iflysse.pojo.Evaluate">
+        <bind name="offset" value="pSize*pIndex"></bind>
+        select a.id,a.userid,l.username,a.goodsid,a.cartid,a.grade,a.comment,a.createtime from assess as a,login as l
+        where a.userid=l.userid and goodsid=#{gId}
+        LIMIT #{pSize} offset #{offset}
+    </select>
+    <select id="getByCartId" resultType="com.iflysse.pojo.Evaluate">
+      select id,userid,goodsid,cartid,grade,`comment`,createtime from assess where cartid=#{cartId}
+    </select>
+    <select id="insertInfo">
+      insert into assess (userid,goodsid,cartid,grade,comment,createtime)
+      values( #{userId},#{goodsId},#{cartId},#{grade},#{comments},now())
+    </select>
+</mapper>

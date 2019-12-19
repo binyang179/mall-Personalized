@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.CategoryMapper">
+    <select id="getParents" resultType="com.iflysse.pojo.Category">
+        Select id, title from category where parentId is null
+    </select>
+    <select id="getGroups" resultType="com.iflysse.pojo.Category">
+        Select distinct `group` from category where parentId=#{pId}
+    </select>
+    <select id="getChildren" resultType="com.iflysse.pojo.Category">
+        Select id, title from category where parentId=#{pId} and `group`=#{group}
+    </select>
+    <select id="getCategoryById" resultType="com.iflysse.pojo.Category">
+        Select id, title,parentId from category where id=#{cId}
+    </select>
+</mapper>

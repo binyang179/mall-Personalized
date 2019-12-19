@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.GoodsCartMapper">
+
+    <select id="getByUser" resultType="com.iflysse.pojo.GoodsCart">
+        <bind name="offset" value="pSize*pIndex"></bind>
+        select id,userid,number,goodsid,createtime,status from goodscart
+        where userid=#{userId} and status=#{status}
+        LIMIT #{pSize} offset #{offset}
+    </select>
+
+    <select id="deleteById" >
+        delete from goodscart where id=#{cartId}
+    </select>
+
+    <select id="updateById" >
+        update goodscart set status=1 , number=#{number},createtime=now() where id=#{cartId}
+    </select>
+
+    <select id="getByInfo" resultType="com.iflysse.pojo.GoodsCart">
+        select id,userid,number,goodsid,createtime,status from goodscart
+        where userid=#{userId} and status=#{status} and goodsid=#{goodsId}
+    </select>
+
+    <select id="insertCartInfo" >
+        INSERT INTO goodscart (userid,number,goodsid,createtime,status)
+        VALUES  ( #{userId},#{number},#{goodsId}, NOW(),#{status} )
+    </select>
+
+    <select id="addCartCountById" >
+        update goodscart set number=number+1,createtime=now() where id=#{cartId}
+    </select>
+
+
+
+</mapper>

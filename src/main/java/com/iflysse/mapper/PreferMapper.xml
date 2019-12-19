@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.PreferMapper">
+    <select id="getByUserId" resultType="com.iflysse.pojo.Prefer">
+       select * from prefer where userid=#{userId}
+    </select>
+    <select id="insertInfo" resultType="com.iflysse.pojo.User">
+        insert into prefer (userid,categoryid,createtime) VALUES(#{userId},#{categoryId},NOW())
+    </select>
+</mapper>

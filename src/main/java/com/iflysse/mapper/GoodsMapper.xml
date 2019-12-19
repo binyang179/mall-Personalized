@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.GoodsMapper">
+    <select id="getAll" resultType="com.iflysse.pojo.Goods">
+        <bind name="offset" value="pSize*pIndex"></bind>
+        select id,goodsname,goodsintroduce,goodsprice,categoryid,url,slidepicture,grade,ranknum from goods
+        LIMIT #{pSize} offset #{offset}
+    </select>
+    <select id="getByCategory" resultType="com.iflysse.pojo.Goods">
+        <bind name="offset" value="pSize*pIndex"></bind>
+        select id,goodsname,goodsintroduce,goodsprice,categoryid,url,slidepicture,grade,ranknum from goods
+        where categoryId=#{cId}
+        LIMIT #{pSize} offset #{offset}
+    </select>
+    <select id="getById" resultType="com.iflysse.pojo.Goods">
+        select id,goodsname,goodsintroduce,goodsprice,categoryid,url,slidepicture,detailpicture,grade,ranknum from goods
+        where id=#{gId}
+    </select>
+
+    <select id="getByName" resultType="com.iflysse.pojo.Goods">
+        <bind name="offset" value="pSize*pIndex"></bind>
+        select id,goodsname,goodsintroduce,goodsprice,categoryid,url,slidepicture,grade,ranknum from goods
+        where goodsname like  "%"#{gName}"%"
+        LIMIT #{pSize} offset #{offset}
+    </select>
+
+
+    <select id="getByIds" resultType="com.iflysse.pojo.Goods">
+        select id,goodsname,goodsintroduce,goodsprice,categoryid,url,slidepicture,detailpicture,grade,ranknum from goods
+        where id in (${goodsIds})
+    </select>
+</mapper>

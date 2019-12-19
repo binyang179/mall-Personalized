@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflysse.mapper.HotGoodsMapper">
+    <select id="getTop" resultType="com.iflysse.pojo.HotGoods">
+        select id,goodsId,createtime from hotgoods order by createtime DESC
+        LIMIT 9
+    </select>
+
+    <select id="getNewsGoods" resultType="com.iflysse.pojo.HotGoods">
+        select id,goodsId,createtime from hotgoods order by createtime DESC
+        LIMIT 3
+    </select>
+</mapper>
